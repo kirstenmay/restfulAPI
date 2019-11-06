@@ -1,0 +1,15 @@
+~~~~~~~~~~~~~~ How to set up an agular projet!!!!!!!!!! ~~~~~~~~~~~~~~~~~
+
+Would you like to add angular routing? (YES)
+Stylesheet (CSS)
+
+terminal window 1
+mongo running
+
+terminal window 2
+ng build --watch
+
+terminal window 3
+nodemon server.js
+
+Change where static is directed to
