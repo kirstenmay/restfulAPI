@@ -14,20 +14,27 @@
     <div class="container">
         <h1>Restful Tasks API</h1>
         <div class="row justify-content-center">
-            <div class="card w-50">
+            <div class="row justify-content-center">
+                <button *ngIf="buttonClick == false" (click)="showTasks()" class="btn btn-outline-primary">Show all tasks!</button>
+            </div>
+            <div class="card w-75" *ngIf="buttonClick">
                 <div class="card-body">
-                  <h2 class="text-center">All Tasks</h2>
-                  <div class="row justify-content-center">
-                    <ul>
-                        <li *ngFor="let task of tasks">{{task.title}} - {{task.description}}</li>
+                    <ul *ngIf="buttonClick">
+                        <li *ngFor="let task of tasks">{{task.title}} - {{task.description}} | <button (click)="showTask(task._id)" class="btn btn-sm btn-outline-info">Show</button></li>
                     </ul>
-                  </div>
-                    <h2 class="text-center">The first task</h2>
                     <div class="row justify-content-center">
-                    <ul>
-                      <li *ngIf="oneTask">{{oneTask.title}} - {{oneTask.description}}</li>
-                    </ul>
-                  </div>
+                        <!-- Add go back button? -->
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="display" class="card w-50" id="display">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <h2>{{oneTask.title}}</h2>
+                    </div>
+                    <div class="row justify-content-center">
+                        <p>{{oneTask.description}}</p>
+                    </div>
                 </div>
             </div>
         </div>

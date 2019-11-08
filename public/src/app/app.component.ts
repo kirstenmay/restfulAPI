@@ -11,27 +11,45 @@ export class AppComponent implements OnInit {
   title = 'MEAN';
   tasks: any;
   oneTask: any;
+  buttonClick: boolean;
+  display: boolean;
 
   constructor(private _httpService: HttpService) {}
   ngOnInit(){
     this.oneTask = {title:""}
     this.tasks = [];
+    this.buttonClick = false;
+    this.display = false;
+  }
+
+  showTasks(){
+    this.buttonClick = true;
     this.getTasksFromService();
-    this.getOneTaskFromService();
+  }
+  showTask(id){
+    console.log(id)
+    console.log("show task is running")
+    this.display = true;
+    this.getOneTaskFromService(id);
   }
   getTasksFromService() {
     let observable = this._httpService.getTasks()
-    observable.subscribe(data => {
-      console.log('We got our data!', data);
-      this.tasks = data;
-      console.log(this.tasks);
+    observable.subscribe((data: any) => {
+      if(data.message == "success"){
+        console.log('We got our data!', data.result);
+        this.tasks = data.result;
+      }
     });
   }
-  getOneTaskFromService() {
-    let observable = this._httpService.getOneTask()
-    observable.subscribe(data => {
-      console.log('We got one task', data);
-      this.oneTask = data;
+  getOneTaskFromService(id) {
+    console.log("get one in app component running")
+    let observable = this._httpService.getOneTask(id);
+    observable.subscribe((data: any) => {
+      console.log("We got something", data)
+      if(data.message == "success"){
+        console.log('We got one task', data.result);
+        this.oneTask = data.result;
+      }
     });
   }
 }
