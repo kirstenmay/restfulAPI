@@ -54,12 +54,7 @@
             <div class="col-6">
                 <div *ngIf="display" class="card" id="display">
                     <div class="card-body">
-                        <div class="row justify-content-center">
-                            <h2>{{oneTask.title}}</h2>
-                        </div>
-                        <div class="row justify-content-center">
-                            <p>{{oneTask.description}}</p>
-                        </div>
+                        <app-task [taskToShow]="oneTask"></app-task>
                         <div class="row justify-content-center">
                             <button (click)="showForm(oneTask._id)" class="btn btn-sm btn-outline-secondary">Edit</button> <button (click)="deleteTask(oneTask._id)" class="btn btn-sm btn-outline-danger">Delete</button>
                         </div>
@@ -95,11 +90,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-<!-- <router-outlet></router-outlet> -->
