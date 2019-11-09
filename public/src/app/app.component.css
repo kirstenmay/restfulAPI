@@ -19,9 +19,13 @@ ul {
 }
 
 button {
-    margin: 1vw 0;
+    margin: 1vw 0.5vw;
 }
 
 #display {
     margin: 2vw 0;
+}
+
+.card {
+    margin-top: 1vw 0;
 }

@@ -13,27 +13,80 @@
 <body>
     <div class="container">
         <h1>Restful Tasks API</h1>
-        <div class="row justify-content-center">
-            <div class="row justify-content-center">
-                <button *ngIf="buttonClick == false" (click)="showTasks()" class="btn btn-outline-primary">Show all tasks!</button>
+        <div class="row" id="margin">
+            <div class="col-10 offset-1">
+                <form (submit)="onSubmit()">
+                    <!-- <p> {{ newTask | json }} </p> -->
+                    <div class="form-group row">
+                        <label for="title" class="col-sm-3 col-form-label">Title:</label>
+                        <div class="col-sm-9">
+                            <input [(ngModel)]="newTask.title" name="title" type="text" class="form-control" placeholder="Task title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-3 col-form-label">Description:</label>
+                        <div class="col-sm-9">
+                            <input [(ngModel)]="newTask.description" name="description" type="text" class="form-control" placeholder="Task description">
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <input type="submit" value="+task" class="btn btn-outline-secondary">
+                    </div>
+                </form>
             </div>
-            <div class="card w-75" *ngIf="buttonClick">
+        </div>
+        <div class="row justify-content-center">
+            <button *ngIf="buttonClick == false" (click)="showTasks()" class="btn btn-outline-info">Show all tasks!</button>
+        </div>
+        <div class="row justify-content-center">
+            <div class="card w-75" *ngIf="buttonClick" id="display">
                 <div class="card-body">
-                    <ul *ngIf="buttonClick">
-                        <li *ngFor="let task of tasks">{{task.title}} - {{task.description}} | <button (click)="showTask(task._id)" class="btn btn-sm btn-outline-info">Show</button></li>
+                    <ul *ngIf="buttonClick" class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let task of tasks">{{task.title}} - {{task.description}} | <button (click)="showTask(task._id)" class="btn btn-sm btn-outline-info">Show</button></li>
                     </ul>
                     <div class="row justify-content-center">
-                        <!-- Add go back button? -->
+                        <button (click)="hide()" class="btn btn-sm btn-outline-secondary">Hide</button>
                     </div>
                 </div>
             </div>
-            <div *ngIf="display" class="card w-50" id="display">
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                        <h2>{{oneTask.title}}</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div *ngIf="display" class="card" id="display">
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <h2>{{oneTask.title}}</h2>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p>{{oneTask.description}}</p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <button (click)="showForm(oneTask._id)" class="btn btn-sm btn-outline-secondary">Edit</button> <button (click)="deleteTask(oneTask._id)" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <p>{{oneTask.description}}</p>
+                </div>
+            </div>
+            <div *ngIf="edit" class="col-6">
+                <div class="card" id="display">
+                    <div class="card-body">
+                        <form (submit)="editTask()">
+                            <!-- <p> {{ newTask | json }} </p> -->
+                            <div class="form-group row">
+                                <label for="title" class="col-sm-3 col-form-label">Title:</label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="edited.title" name="title" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-3 col-form-label">Description:</label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="edited.description" name="description" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="float-right">
+                                <input type="submit" value="Edit" class="btn btn-outline-secondary">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
